@@ -63,6 +63,9 @@
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
+    <Reference Include="Parse.Unity">
+      <HintPath>Assets\Parse\Parse.Unity.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UnityVS.BouncyBall.CSharp.Plugins.csproj">
@@ -100,7 +103,11 @@
     <Compile Include="Assets\Scrips\ButtonCooldown.cs" />
     <Compile Include="Assets\Scrips\Drawline.cs" />
     <Compile Include="Assets\Scrips\GameManager.cs" />
+    <Compile Include="Assets\Scrips\LocalScoresManager.cs" />
     <Compile Include="Assets\Scrips\MainMenu\MenuController.cs" />
+    <Compile Include="Assets\Scrips\MainMenu\ScoreGUIItem.cs" />
+    <Compile Include="Assets\Scrips\MainMenu\ScoresGUICollection.cs" />
+    <Compile Include="Assets\Scrips\ParseManager.cs" />
     <Compile Include="Assets\Scrips\Pencil.cs" />
     <Compile Include="Assets\Scrips\PlatformController.cs" />
     <Compile Include="Assets\Scrips\PlayerController.cs" />
@@ -111,6 +118,8 @@
     <None Include="Assets\CodeStage\AntiCheatToolkit\Integration\readme.txt" />
     <None Include="Assets\CodeStage\AntiCheatToolkit\changelog.txt" />
     <None Include="Assets\Fantasy Skybox FREE\Readme\Readme.txt" />
+    <None Include="Assets\Parse\Parse.Unity.xml" />
+    <None Include="Assets\Parse\README.txt" />
     <None Include="Assets\Plugins\Android\unityads\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\unityads\build.xml" />
     <None Include="Assets\Plugins\Android\unityads\proguard-project.txt" />

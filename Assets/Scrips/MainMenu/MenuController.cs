@@ -12,4 +12,10 @@ public class MenuController : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void GetLocalScores()
+    {
+        var scores = LocalScoresManager.Instance.ReadScores();
+        Debug.Log(scores.Count);
+    }
 }

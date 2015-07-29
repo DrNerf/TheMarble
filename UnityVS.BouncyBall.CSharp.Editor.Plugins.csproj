@@ -102,6 +102,9 @@
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
+    <Reference Include="Parse.Unity">
+      <HintPath>Assets\Parse\Parse.Unity.dll</HintPath>
+    </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Assets\UnityVS\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
@@ -147,6 +150,8 @@
     <None Include="Assets\CodeStage\AntiCheatToolkit\Integration\readme.txt" />
     <None Include="Assets\CodeStage\AntiCheatToolkit\changelog.txt" />
     <None Include="Assets\Fantasy Skybox FREE\Readme\Readme.txt" />
+    <None Include="Assets\Parse\Parse.Unity.xml" />
+    <None Include="Assets\Parse\README.txt" />
     <None Include="Assets\Plugins\Android\unityads\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\unityads\build.xml" />
     <None Include="Assets\Plugins\Android\unityads\proguard-project.txt" />
