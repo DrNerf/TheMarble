@@ -9,6 +9,7 @@ public class ParseManager : MonoBehaviour
 {
     public static ParseManager Instance;
     public List<ScoreItem> Top10 = new List<ScoreItem>();
+    public static bool IsNetworkAvailable = true;
 	// Use this for initialization
 	void Awake () 
     {
@@ -27,22 +28,25 @@ public class ParseManager : MonoBehaviour
 
     public void Start()
     {
-        var query = ParseObject.GetQuery("LadderBoard")
-            .OrderByDescending("score")
-            .Limit(10);
-        query.FindAsync().ContinueWith(t =>
+        if (IsNetworkAvailable)
         {
-            IEnumerable<ParseObject> results = t.Result;
-            foreach (ParseObject item in results)
+            var query = ParseObject.GetQuery("LadderBoard")
+                .OrderByDescending("score")
+                .Limit(10);
+            query.FindAsync().ContinueWith(t =>
             {
-                Top10.Add(new ScoreItem
+                IEnumerable<ParseObject> results = t.Result;
+                foreach (ParseObject item in results)
                 {
-                    IsBoosted = bool.Parse(item["isBoosted"].ToString()),
-                    Score = int.Parse(item["score"].ToString()),
-                    Player = item["player"].ToString()
-                });
-            }
-        });
+                    Top10.Add(new ScoreItem
+                    {
+                        IsBoosted = bool.Parse(item["isBoosted"].ToString()),
+                        Score = int.Parse(item["score"].ToString()),
+                        Player = item["player"].ToString()
+                    });
+                }
+            });
+        }
     }
 }
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI;
 
 public class ScoresGUICollection : MonoBehaviour 
 {
@@ -20,16 +21,23 @@ public class ScoresGUICollection : MonoBehaviour
             {
                 scores = scores.OrderByDescending(x => x.Score).ToList();
             }
+            float height = 0;
             for (int i = 0; i < scores.Count; i++)
             {
                 GameObject item = Instantiate(ScoreGUIItemPrefab);
-                item.transform.SetParent(ScoresPanel.transform);
-                Vector3 position = ScoresPanel.position;
-                position.y += ScoresPanel.rect.height / 2 - 15;// +35;
-                position.y -= i * 40;
-                item.GetComponent<RectTransform>().position = position;
+                var rectTransform = item.GetComponent<RectTransform>();
+                Vector3 position = rectTransform.position;
+                position.y += (ScoresPanel.sizeDelta.y / 2) - (rectTransform.sizeDelta.y / 2);
+                position.y -= i * 70;
+                rectTransform.position = position;
+                rectTransform.SetParent(ScoresPanel.transform, false);
+                //rectTransform.localScale = new Vector3(1, rectTransform.localScale.y);
                 item.GetComponent<ScoreGUIItem>().SetProperties(scores[i]);
-            } 
+                height = rectTransform.sizeDelta.y;
+            }
+            float panelHeight = height * scores.Count;
+            ScoresPanel.sizeDelta = new Vector2(ScoresPanel.sizeDelta.x, panelHeight) * 0.80f;
+            ScoresPanel.parent.GetComponent<ScrollRect>().normalizedPosition = new Vector2(1, 1);
         }
     }
 

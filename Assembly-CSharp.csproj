@@ -75,8 +75,10 @@
      <Compile Include="Assets\Scrips\ButtonCooldown.cs" />
      <Compile Include="Assets\Scrips\Drawline.cs" />
      <Compile Include="Assets\Scrips\GameManager.cs" />
+     <Compile Include="Assets\Scrips\Helpers\NetworkHelper.cs" />
      <Compile Include="Assets\Scrips\LocalScoresManager.cs" />
      <Compile Include="Assets\Scrips\MainMenu\MenuController.cs" />
+     <Compile Include="Assets\Scrips\MainMenu\ScaleToChildren.cs" />
      <Compile Include="Assets\Scrips\MainMenu\ScoreGUIItem.cs" />
      <Compile Include="Assets\Scrips\MainMenu\ScoresGUICollection.cs" />
      <Compile Include="Assets\Scrips\ParseManager.cs" />

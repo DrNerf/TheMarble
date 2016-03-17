@@ -12,9 +12,46 @@ public class GameManager : MonoBehaviour
     public bool AdsTestMode;
     public InputField PlayerNameField;
     public Text ScoreLabel;
+    public Button BoostBtn;
+    public GameObject PausePanel;
 
     private ObscuredInt Score;
     private bool IsBoosted = false;
+
+    void Start()
+    {
+        if (!ParseManager.IsNetworkAvailable)
+        {
+            BoostBtn.interactable = false;
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Pause();
+        }
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0;
+        PausePanel.SetActive(true);
+    }
+
+    public void UnPause()
+    {
+        Time.timeScale = 1;
+        PausePanel.SetActive(false);
+    }
+
+    public void LoadMainMenu()
+    {
+        Destroy(GameObject.Find("ScoresManager"));
+        Time.timeScale = 1;
+        Application.LoadLevel(0);
+    }
 
     public void KillPlayer()
     {
@@ -37,7 +74,7 @@ public class GameManager : MonoBehaviour
     {
         int rand = new System.Random().Next(100);
         Debug.Log(rand);
-        if (rand <= 20)
+        if (rand <= 30)
         {
             if (Advertisement.IsReady())
             {
@@ -101,19 +138,22 @@ public class GameManager : MonoBehaviour
 
     public void SaveScore()
     {
-        if (ParseManager.Instance == null)
+        if (true)
         {
-            Camera.main.gameObject.AddComponent<ParseManager>();
-        }
-        ScoreItem item = new ScoreItem
-        {
-            IsBoosted = IsBoosted,
-            Score = Score,
-            Player = PlayerNameField.text
-        };
+            if (ParseManager.Instance == null)
+            {
+                Camera.main.gameObject.AddComponent<ParseManager>();
+            }
+            ScoreItem item = new ScoreItem
+            {
+                IsBoosted = IsBoosted,
+                Score = Score,
+                Player = PlayerNameField.text
+            };
 
-        ParseManager.Instance.SaveScore(item);
-        LocalScoresManager.Instance.Write(item);
-        IsBoosted = false;
+            ParseManager.Instance.SaveScore(item);
+            LocalScoresManager.Instance.Write(item);
+            IsBoosted = false; 
+        }
     }
 }

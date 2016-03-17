@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [Range(200, 500)]
     public float JumpMultiplier;
 
-    private GameObject[] PlatformPool = new GameObject[3];
+    private GameObject[] PlatformPool = new GameObject[5];
     private ObscuredInt _Score = 0;
     private bool IsGrounded = false;
     private Rigidbody RigBody;
@@ -66,16 +66,15 @@ public class PlayerController : MonoBehaviour
         if (collision.collider.tag == "Platform" && !collision.transform.parent.GetComponent<PlatformController>().IsTouched)
         {
             AudioManager.Instance.Play(AudioManager.SoundTrack.Blip);
-            LastSecureHeight = transform.position.y;
-            GameObject platform = GetAvailablePlatform();
+            //GameObject platform = GetAvailablePlatform();
             PlatformController platformController = collision.transform.parent.GetComponent<PlatformController>();
-            int nextPosition = Random.Range(0, platformController.PossiblePositions.Length);
+            //int nextPosition = Random.Range(0, platformController.PossiblePositions.Length);
             //Debug.Log(nextPosition);
-            Transform position = platformController.PossiblePositions[nextPosition].transform;
+            //Transform position = platformController.PossiblePositions[nextPosition].transform;
             //Transform position = collision.transform.parent.GetComponent<PlatformController>().PossiblePositions[nextPosition].transform;
-            platform.transform.position = position.position;
-            platform.transform.rotation = position.rotation;
-            platform.SetActive(true);
+            //platform.transform.position = position.position;
+            //platform.transform.rotation = position.rotation;
+            //platform.SetActive(true);
             platformController.GetComponent<PlatformController>().IsTouched = true;
             Score++;
         }
@@ -85,6 +84,24 @@ public class PlayerController : MonoBehaviour
             {
                 AudioManager.Instance.Play(AudioManager.SoundTrack.Blip);
             }
+        }
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.tag == "Platform" && !collider.transform.parent.GetComponent<PlatformController>().IsHovered)
+        {
+            GameObject platform = GetAvailablePlatform();
+            platform.GetComponent<Animator>().SetTrigger("Spawn");
+            PlatformController platformController = collider.transform.parent.GetComponent<PlatformController>();
+            int nextPosition = Random.Range(0, platformController.PossiblePositions.Length);
+            Transform position = platformController.PossiblePositions[nextPosition].transform;
+            platform.transform.position = position.position;
+            platform.transform.rotation = position.rotation;
+            platform.SetActive(true);
+            platformController.GetComponent<PlatformController>().IsHovered = true;
+            LastSecureHeight = collider.transform.position.y;
+            //Score++;
         }
     }
 
@@ -104,6 +121,7 @@ public class PlayerController : MonoBehaviour
         }
         GameObject temp = PlatformPool[0];
         temp.GetComponent<PlatformController>().IsTouched = false;
+        temp.GetComponent<PlatformController>().IsHovered = false;
         for (int i = 0; i < PlatformPool.Length - 1; i++)
         {
             PlatformPool[i] = PlatformPool[i + 1];

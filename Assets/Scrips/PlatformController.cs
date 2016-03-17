@@ -5,4 +5,5 @@ public class PlatformController : MonoBehaviour
 {
     public bool IsTouched = false;
     public GameObject[] PossiblePositions;
+    public bool IsHovered = false;
 }
